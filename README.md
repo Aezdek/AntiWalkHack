@@ -19,7 +19,7 @@ This script is designed to detect and prevent player movement exploits in a Robl
 
 ## Configuration
 1. Create a [SERVER SIDED](https://devforum.roblox.com/t/what%E2%80%99s-the-difference-between-a-local-script-and-a-server-script/2452614) Script In ServerScriptService
-2. Paste [Speedhack Script](Speedhack.lua) into the new script.
+2. Paste [Speedhack Script]([Speedhack.lua](https://github.com/Aezdek/AntiWalkHack/blob/main/SpeedHack.lua)) into the new script.
 3. Modify the `config` table in the script to customize the anticheat settings:
 
 ```lua
