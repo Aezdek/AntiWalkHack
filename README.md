@@ -32,6 +32,6 @@ local config = {
 ```
 
 ## Notes
-- Modify the script If you have a **Teleport/Spring** System as this script **will** interfere with it.
+- Modify the script If you have a **Teleport/Sprint** System as this script **will** interfere with it.
 - Use DataStoreService to save the bans or use your own Ban System.
 - Custom Models **without** __HumanoidRootPart__ are not supported, as this script heavily relies on it.
