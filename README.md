@@ -1,37 +1,52 @@
-# Player Anticheat System
+# AntiWalkHack — Roblox Speed & Jump Exploit Detection
 
-## Overview
-This script is designed to detect and prevent player movement exploits in a Roblox game. It monitors player positions and flags excessive movement speeds or jumps. If a player exceeds the allowed thresholds, they are flagged, and upon reaching a maximum number of flags, they are either kicked or eliminated based on configuration settings.
+A lightweight, server-sided anticheat for Roblox that detects and punishes speed hacking and fly hacking by comparing player positions over time.
 
-## Features
-- Monitors player movement for excessive speed and jump height.
-- Flags players who exceed the allowed speed/height.
-- Configurable maximum flag count before taking action.
-- Configurable maximum speed and jumpHeight.
-- Option to kick or eliminate flagged players.
-- Automatically clears player data upon leaving to prevent memory leaks.
+## How It Works
 
-## How it works
-1. A new task is created for each player.
-2. Player Position is Saved
-3. After a 0.5 second delay, New Positions are saved
-4. Positions are compared and action is taken.
+1. Every 0.5 seconds, the player's position is sampled
+2. The delta (change in position) is calculated
+3. If horizontal movement or vertical movement exceeds the configured thresholds, the player is flagged and teleported back
+4. Once a player hits the flag limit, they are kicked or killed depending on config
 
-## Configuration
-1. Create a [SERVER SIDED](https://devforum.roblox.com/t/what%E2%80%99s-the-difference-between-a-local-script-and-a-server-script/2452614) Script In ServerScriptService
-2. Paste [Speedhack Script]([Speedhack.lua](https://github.com/Aezdek/AntiWalkHack/blob/main/SpeedHack.lua)) into the new script.
-3. Modify the `config` table in the script to customize the anticheat settings:
+## Setup
+
+1. Create a **Script** in `ServerScriptService` (not a LocalScript)
+2. Paste the contents of `SpeedHack.lua` into it
+3. Adjust the `config` table at the top to match your game:
 
 ```lua
 local config = {
-    WalkSpeed = 16, -- Default WalkSpeed 
-    JumpHeight = 50, -- Default JumpHeight
-    MaxFlags = 5, -- Max Flags before Player is Kicked
-    kickPlayer = true -- Kick Player or no.
+    WalkSpeed  = 16,   -- Match your game's default WalkSpeed
+    JumpHeight = 50,   -- Match your game's JumpHeight
+    MaxFlags   = 5,    -- How many violations before action is taken
+    kickPlayer = true  -- true = kick, false = kill
 }
 ```
 
+## Features
+
+- Per-player task-based position tracking
+- Teleports exploiter back to last safe position on detection
+- Configurable thresholds, flag limit, and punishment
+- Automatic cleanup on player leave — no memory leaks
+- Handles respawns correctly (cancels and restarts task on CharacterAdded)
+- Horizontal movement checked as combined X+Z vector (more accurate than checking axes separately)
+
 ## Notes
-- Modify the script If you have a **Teleport/Sprint** System as this script **will** interfere with it.
-- Use DataStoreService to save the bans or use your own Ban System.
-- Custom Models **without** __HumanoidRootPart__ are not supported, as this script heavily relies on it.
+
+> ⚠️ If your game has a **sprint or speed boost system**, temporarily disable the anticheat or raise `WalkSpeed` during those states — otherwise legitimate players will be flagged.
+
+> ⚠️ Custom characters without a `HumanoidRootPart` are not supported.
+
+> This script runs **server-sided only**. Never trust the client for position validation.
+
+## What It Doesn't Catch
+
+- Teleport hacks (single large position jump — detectable but needs tuning)
+- Noclip (requires raycasting checks)
+- Aim hacks, ESP, or any client-side visual exploits
+
+## License
+
+MIT — credit to [Aezdek](https://github.com/Aezdek) appreciated in derivative projects.
