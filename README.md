@@ -1,4 +1,4 @@
-# AntiWalkHack — Roblox Speed & Jump Exploit Detection
+# AntiWalkHack - Roblox Speed & Jump Exploit Detection
 
 A lightweight, server-sided anticheat for Roblox that detects and punishes speed hacking and fly hacking by comparing player positions over time.
 
@@ -39,12 +39,14 @@ local config = {
 
 > ⚠️ Custom characters without a `HumanoidRootPart` are not supported.
 
-> This script runs **server-sided only**. Never trust the client for position validation.
+> Please do not rely on this anticheat, this is just a prototype!
+
+> This script runs **server-sided only**
 
 ## What It Doesn't Catch
-
-- Teleport hacks (single large position jump — detectable but needs tuning)
-- Noclip (requires raycasting checks)
+(The title literally says AntiSpeedHack) so it ofcourse does not do the following
+- Teleport hacks (single large position jump, it is detectable but needs tuning)
+- Noclip
 - Aim hacks, ESP, or any client-side visual exploits
 
 ## License
